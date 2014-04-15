@@ -8,8 +8,20 @@ ex_foo(PyObject *self, PyObject *args)
 	return Py_None;
 }
 
+static PyObject *
+ex_bar(PyObject *self, PyObject *args)
+{
+	int x, result;
+	if (!PyArg_ParseTuple(args, "i", &x)) {
+		return NULL;
+	}
+	result = x * x;
+	return Py_BuildValue("i", result);
+}
+
 static PyMethodDef BlenderTest_methods[] = {
 	{ "foo", ex_foo, METH_VARARGS, "foo() doc string" },
+	{ "bar", ex_bar, METH_VARARGS, "bar(i) doc string" },
 	{ NULL, NULL }
 };
 
